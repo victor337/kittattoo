@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "933631400256",
+    "firebase_url": "https://kittatttonovo.firebaseio.com",
+    "project_id": "kittatttonovo",
+    "storage_bucket": "kittatttonovo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:933631400256:android:272187b236bba237d842a5",
+        "android_client_info": {
+          "package_name": "br.com.barbosa.kittattoonovo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "933631400256-kc8das7h989moujtta8oc93qh6la1ed4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwtNplrkCGvfAldefc9eYelN5gckhTtHk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "933631400256-kc8das7h989moujtta8oc93qh6la1ed4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
