@@ -1,8 +1,7 @@
 import 'package:advanced_splashscreen/advanced_splashscreen.dart';
 import 'package:flutter/material.dart';
-//import 'package:kittattoonovo/dentrodoapp/homepage.dart';
+import 'package:kittattoonovo/dentrodoapp/homepage.dart';
 import 'package:kittattoonovo/scoped/scoped.dart';
-import 'package:kittattoonovo/telasiniciais/login.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 
@@ -16,11 +15,12 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return ScopedModelDescendant<UserModel>(
       builder: (context, child, model){
+        model.pegarUidDoUsuario();
         return Stack(
           children: <Widget>[
             Container(color: Color.fromARGB(255, 70, 0, 70)),
             AdvancedSplashScreen(
-              child: LoginScreen(),
+              child: HomePage(),
               seconds: 5,
               colorList: [
                 Color.fromARGB(255, 70, 0, 70),

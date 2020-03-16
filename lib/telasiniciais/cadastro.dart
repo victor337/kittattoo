@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kittattoonovo/scoped/scoped.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:flutter_correios/flutter_correios.dart';
-import 'package:flutter_correios/model/resultado_cep.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:intl/intl.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 
@@ -27,8 +27,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
   final FocusNode fnFor = FocusNode();
   final FocusNode fnFive = FocusNode();
   final FocusNode fnSix = FocusNode();
-
-  final FlutterCorreios fc = FlutterCorreios();
 
   var maskFormattercep = new MaskTextInputFormatter(mask: '########', filter: { "#": RegExp(r'[0-9]') });
   var maskFormatternascimento = new MaskTextInputFormatter(mask: '##/##/####', filter: { "#": RegExp(r'[0-9]') });
@@ -54,7 +52,28 @@ class _CadastroScreenState extends State<CadastroScreen> {
 
   String endereco = "";
 
+  pegarARua(String nomedarua)async{
+    http.Response response = await http.get("https://viacep.com.br/ws/$nomedarua/json/");
+    dynamic correto = json.decode(response.body);
+    print(correto);
+    if(correto["erro"] == true){
+      setState(() {
+        endereco = "Endereço não encontrado!";
+      });
+    }
+    else{
+      String rua = correto["logradouro"];
+      String bairro = correto["bairro"];
+      String estado = correto["uf"];
 
+      setState(() {
+        endereco = "$rua, $bairro - $estado";
+      });
+    }
+    
+  }
+
+  
  
 
   //Função para caso conta seja criado com sucesso
@@ -95,21 +114,6 @@ class _CadastroScreenState extends State<CadastroScreen> {
     setState(() {
       idade = hoje - nasci;
     });
-  }
-
-  //Função para buscar Cep
-  buscarCep(String cep)async{
-    ResultadoCEP resultado = await fc.consultarCEP(cep: cep);
-    if(resultado == null){
-      setState(() {
-        endereco = "Endereço não encontrado!";
-      });
-    }
-    else{
-      setState(() {
-        endereco = "${resultado.logradouro} - ${resultado.bairro}, ${resultado.estado}";
-      });
-    }
   }
 
   //Função para botão que exibe senha no textformfield
@@ -382,7 +386,7 @@ class _CadastroScreenState extends State<CadastroScreen> {
                                           onFieldSubmitted: (form){
                                             fnTree.unfocus();
                                             FocusScope.of(context).requestFocus(fnFor);
-                                            buscarCep(form);
+                                            pegarARua(form.toString());
                                           },
                                           keyboardType: TextInputType.number,
                                           autocorrect: false,

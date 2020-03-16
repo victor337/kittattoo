@@ -39,7 +39,7 @@ class UserModel extends Model {
   //Função para mostrar snackbar caso seja criado com sucesso
     logado(dynamic scaffoldKey, BuildContext context){
       scaffoldKey.currentState.showSnackBar(
-        SnackBar(content: Text('Conta criada com sucesso!'), duration: Duration(seconds: 3), backgroundColor: Colors.blue,)
+        SnackBar(content: Text('Logado com suscesso!'), duration: Duration(seconds: 3), backgroundColor: Colors.purpleAccent,)
       );
       Future.delayed(Duration(seconds: 3)).then((_){
         Navigator.of(context).pushAndRemoveUntil(
